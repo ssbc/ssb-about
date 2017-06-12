@@ -9,7 +9,7 @@ exports.manifest = {
 }
 
 exports.init = function (ssb, config) {
-  return ssb._flumeUse('about', FlumeReduce(0, reduce, map))
+  return ssb._flumeUse('about', FlumeReduce(1, reduce, map))
 }
 
 function reduce (result, item) {
@@ -21,7 +21,7 @@ function reduce (result, item) {
         var valuesForKey = valuesForId[key] = valuesForId[key] || {}
         for (var author in item[target][key]) {
           var value = item[target][key][author]
-          if (!valuesForKey[author] || value.lastSeq > valuesForKey[author].lastSeq) {
+          if (!valuesForKey[author] || value[1] > valuesForKey[author][1]) {
             valuesForKey[author] = value
           }
         }
@@ -40,10 +40,7 @@ function map (msg) {
     for (var key in msg.value.content) {
       if (key !== 'about' && key !== 'type') {
         values[key] = {
-          [author]: {
-            value: msg.value.content[key],
-            lastSeq: msg.value.sequence
-          }
+          [author]: [msg.value.content[key], msg.value.timestamp]
         }
       }
     }
