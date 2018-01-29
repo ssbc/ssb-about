@@ -1,7 +1,7 @@
 {
   "name": "ssb-about",
   "description": "scuttlebot plugin for getting reduced 'about' state",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/ssbc/ssb-about",
   "repository": {
     "type": "git",
