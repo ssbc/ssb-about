@@ -65,7 +65,7 @@ e.g. Here, concerning `@3r4+IyB5NV...` (a user) there are two opinions about the
 }
 ```
 
-### `sbout.about.stream` => pull-stream source
+### `sbot.about.stream` => pull-stream source
 
 Be careful, this is a stream which provides:
 - an initial value
