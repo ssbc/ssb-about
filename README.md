@@ -22,9 +22,11 @@ const server = Server(config)
 
 ## API
 
-### `sbot.about.get(cb)`
+### `sbot.about.get(opts, cb)`
 
 Get the current state of the about view. This will wait until the view is up to date, if necessary.
+
+`opts` is optional, if `opts.dest` is provided only the specific key will be returned from the underlying cache.
 
 `cb(err, data)` is a standard callback function where `data` is of the form:
 

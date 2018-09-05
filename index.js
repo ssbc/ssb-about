@@ -9,7 +9,20 @@ exports.manifest = {
 }
 
 exports.init = function (ssb, config) {
-  return ssb._flumeUse('about', FlumeReduce(1, reduce, map))
+  var index = ssb._flumeUse('about', FlumeReduce(1, reduce, map))
+
+  return {
+    get: function(opts, cb) {
+      if (opts && opts.dest) {
+        index.get(function(err, value) {
+          if (err) return cb(err)
+          cb(null, value[opts.dest])
+        })
+      } else
+        index.get(opts, cb)
+    },
+    stream: index.stream
+  }
 }
 
 function reduce (result, item) {
