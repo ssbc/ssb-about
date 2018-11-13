@@ -13,8 +13,12 @@
     "pull-stream": "^3.6.9",
     "ssb-ref": "^2.7.1"
   },
-  "devDependencies": {},
-  "scripts": {},
+  "devDependencies": {
+    "standard": "^12.0.1"
+  },
+  "scripts": {
+    "lint": "standard --fix"
+  },
   "author": "Secure Scuttlebutt Consortium",
   "license": "MIT"
 }
