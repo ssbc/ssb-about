@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "flumeview-reduce": "^1.3.9",
+    "pull-defer": "^0.2.3",
+    "pull-stream": "^3.6.9",
     "ssb-ref": "^2.7.1"
   },
   "devDependencies": {},

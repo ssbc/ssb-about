@@ -13,8 +13,9 @@ const config = { ... } // needs options
 // Install the plugin
 Server
   .use(require('scuttlebot/plugins/master')) // required
+  .use(require('ssb-backlinks')) // required
   .use(require('ssb-about'))
-  .use(require('ssb-backlinks')) // not required, just an example
+
 
 // Start the server
 const server = Server(config)
@@ -22,7 +23,20 @@ const server = Server(config)
 
 ## API
 
-### `sbot.about.get(cb)`
+
+`server.about.socialValueStream`
+`server.about.socialValuesStream`
+`server.about.latestValueStream`
+`server.about.valueFromStream`
+
+`server.about.socialValue({ key, dest }, cb)`
+`server.about.latestValue({ key dest }, cb)`
+`server.about.socialValues({ key, dest }, cb)`
+`server.about.latestValues({ key, dest }, cb)`
+
+
+
+### `server.about.get(cb)`
 
 Get the current state of the about view. This will wait until the view is up to date, if necessary.
 
