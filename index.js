@@ -6,16 +6,16 @@ exports.name = 'about'
 exports.version = require('./package.json').version
 
 exports.manifest = {
-  read: 'source',
+  socialValue: 'async',
+  latestValue: 'async',
+  socialValues: 'async',
+  latestValues: 'async', // get about values of chosen keys
 
   socialValueStream: 'source', // get the final value (based on authorId and yourId)
   socialValuesStream: 'source', // get all values known in your network
   latestValueStream: 'source', // latest value set in your network
 
-  socialValue: 'async',
-  latestValue: 'async',
-  socialValues: 'async',
-  latestValues: 'async' // get about values of chosen keys
+  read: 'source'
 }
 
 exports.init = function (ssb, config) {
@@ -112,8 +112,8 @@ exports.init = function (ssb, config) {
   }
 
   function latestValueStream ({ key, dest, authorId = null }) {
-    if (authorId) return valueFromAuthorStream({key, dest, authorId})
-  
+    if (authorId) return valueFromAuthorStream({ key, dest, authorId })
+
     var values = {}
     var value = null
     var authors = []

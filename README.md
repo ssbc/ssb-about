@@ -126,6 +126,10 @@ pull(
 
 If `authorId` is present, this provides a stream of values for a particular `dest` `key`, as asserted by that particular `authorId`
 
+### `server.about.read({ reverse = false, limit, live, old, dest })` => source
+
+A stream of all about messages that target `dest`
+
 ## License
 
 MIT
