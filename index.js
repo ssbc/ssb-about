@@ -11,7 +11,6 @@ exports.manifest = {
   socialValueStream: 'source', // get the final value (based on authorId and yourId)
   socialValuesStream: 'source', // get all values known in your network
   latestValueStream: 'source', // latest value set in your network
-  valueFromStream: 'source', // get value from author with `id`
 
   socialValue: 'async',
   latestValue: 'async',
@@ -46,22 +45,6 @@ exports.init = function (ssb, config) {
         ))
       })
       return stream
-    },
-    valueFromStream: function ({ key, dest, id }) {
-      var values = {}
-      return pull(
-        socialValuesStream({ key, dest }),
-        pull.map((item) => {
-          Object.keys(item).forEach(author => {
-            if (item[author] && item[author].remove) {
-              delete values[author]
-            } else {
-              values[author] = item[author]
-            }
-          })
-          return values[id]
-        })
-      )
     },
     latestValueStream,
     socialValuesStream,
@@ -110,7 +93,27 @@ exports.init = function (ssb, config) {
     )
   }
 
-  function latestValueStream ({ key, dest }) {
+  function valueFromAuthorStream ({ key, dest, authorId }) {
+    var values = {}
+    return pull(
+      // rewrite to be more efficient query (specifically target author ID in flume lookup)
+      socialValuesStream({ key, dest }),
+      pull.map((item) => {
+        Object.keys(item).forEach(author => {
+          if (item[author] && item[author].remove) {
+            delete values[author]
+          } else {
+            values[author] = item[author]
+          }
+        })
+        return values[authorId]
+      })
+    )
+  }
+
+  function latestValueStream ({ key, dest, authorId = null }) {
+    if (authorId) return valueFromAuthorStream({key, dest, authorId})
+  
     var values = {}
     var value = null
     var authors = []
