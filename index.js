@@ -205,6 +205,7 @@ exports.init = function (ssb, config) {
     return pull(
       ssb.backlinks.read({
         reverse,
+        since: -1,
         live,
         limit,
         query: [{ $filter: {
