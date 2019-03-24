@@ -8,10 +8,7 @@
     "url": "git://github.com/ssbc/ssb-about.git"
   },
   "dependencies": {
-    "flumeview-reduce": "^1.3.9",
-    "pull-defer": "^0.2.3",
-    "pull-stream": "^3.6.9",
-    "ssb-ref": "^2.7.1"
+    "ssb-social-index": "0.0.1"
   },
   "devDependencies": {
     "standard": "^12.0.1"
