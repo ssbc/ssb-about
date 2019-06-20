@@ -201,7 +201,7 @@ exports.init = function (ssb, config) {
     )
   }
 
-  function read ({ reverse = false, limit, live, old, dest }) {
+  function read ({ reverse = false, limit = null, live = null, old = null, dest = null }) {
     return pull(
       ssb.backlinks.read({
         reverse,
